@@ -1,2 +1,2 @@
 # biostat
-Repository for my biostatistic teaching courses
+Repository for my biostatistics teaching courses
