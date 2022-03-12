@@ -1,3 +1,10 @@
 # biostat
-Repository for my biostatistics teaching courses
-I created this repository for team teaching collaboration in developing materials, code, and dataset for the biostatistics classes.
+Repository for my biostatistics teaching courses.
+
+This repository was created for team teaching collaboration in developing materials, code, and dataset for the biostatistics classes. This is not replacing LIVE UNPAD as LMS but rather a complementary tools for sharing materials, codes, dan datasets.
+
+There would be two courses: 
+1. Basic Biostatistics (Code: BB)
+2. Advance Biostatistics (Code: AB)
+
+
