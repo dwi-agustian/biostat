@@ -9,7 +9,8 @@ library(pander)
 library(MASS)
 library(tidyverse)
 #data reading
-
+library(data.table)
+fHH1 <- fread("https://raw.githubusercontent.com/dwi-agustian/biostat/main/fHH1new.csv?token=GHSAT0AAAAAABSN2FVPZHTGIVV5QTL2MA6UYRMTG3A")
 
 #Explaratory Data analysis
 names(fHH1)
@@ -127,8 +128,7 @@ drop_in_dev <- anova(modela2, modela2L, test = "Chisq")
 
 drop_in_dev
 
-library(data.table)
-percobaan <- fread("https://raw.githubusercontent.com/dwi-agustian/biostat/main/fHH1new.csv?token=GHSAT0AAAAAABSN2FVPZHTGIVV5QTL2MA6UYRMTG3A")
-names(percobaan)
+
+
 
 
