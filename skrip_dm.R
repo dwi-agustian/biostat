@@ -1,5 +1,8 @@
 #skript R
 1+1
+#Aktivasi package dplyr
+library(dplyr)
+
 #membaca data dari URL
 library(readr)
 c_data <- read_csv("https://raw.githubusercontent.com/dwi-agustian/biostat/main/c_data.csv")
