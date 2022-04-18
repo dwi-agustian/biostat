@@ -70,6 +70,18 @@ w5_pef_c_fj = full_join(w5, pef, by = "pidlink")
 summary(w5_pef_c_ij)
 summary(w5_pef_c_fj)
 
+#menggabungkan observation dengan struktur variable yg sama
+#contoh, misalkan data multicenter (lokasi penelitian di berbagai tempat)
+# dataDKI
+pef_dki <- read_csv("https://raw.githubusercontent.com/dwi-agustian/biostat/main/pef_dki.csv")
+
+# data Jabar
+pef_jabar <- read_csv("https://raw.githubusercontent.com/dwi-agustian/biostat/main/pef_jabar.csv")
+
+#menggabungkan obsevari
+pef_dki_jabar = rbind(pef_dki,pef_jabar
+                      
+                      
 #remove objects
 rm(w5_pef_c_fj,w5_pef_c_ij,w5_pef_c_lj,w5_pef_c_rj)
 
