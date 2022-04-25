@@ -7,4 +7,7 @@ There would be two courses:
 1. Basic Biostatistics (Code: BB)
 2. Advance Biostatistics (Code: AB)
 
+Data Description
+1. PEF (PEF.csv)
+Data peak expiration flow yang didapat dari data IFLS gelombang 5. Didowload dari website IFLS (www.ifls.org) pada tanggal x-x-yyyy.
 
