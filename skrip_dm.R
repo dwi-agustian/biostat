@@ -78,8 +78,8 @@ pef_dki <- read_csv("https://raw.githubusercontent.com/dwi-agustian/biostat/main
 # data Jabar
 pef_jabar <- read_csv("https://raw.githubusercontent.com/dwi-agustian/biostat/main/pef_jabar.csv")
 
-#menggabungkan obsevari
-pef_dki_jabar = rbind(pef_dki,pef_jabar
+#menggabungkan observasi
+pef_dki_jabar = rbind(pef_dki,pef_jabar)
                       
                       
 #remove objects
