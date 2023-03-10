@@ -1,3 +1,4 @@
+# skript untuk kelas data manajemen dan analisis
 #skript R
 1+1
 #Aktivasi package dplyr
