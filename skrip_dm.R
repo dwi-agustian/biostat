@@ -46,9 +46,10 @@ hist(pef$age)
 #memvisualisasi distribusi data umur berupa numerik dengan boxplot pada object dataset pef
 boxplot(pef$age)
 
-#memvisualisasi frekuensi dari 
+#memvisualisasi frekuensi dari variable type pada object dataset c_data
 table(c_data$type)
 
+#memvisualisasi frekuensi dari variable region pada object dataset c_data
 table(c_data$region)
 
 #subsetting data set
@@ -104,19 +105,17 @@ pef_dki <- read_csv("https://raw.githubusercontent.com/dwi-agustian/biostat/main
 # data Jabar
 pef_jabar <- read_csv("https://raw.githubusercontent.com/dwi-agustian/biostat/main/pef_jabar.csv")
 
-#menggabungkan observasi
-pef_dki_jabar = rbind(pef_dki,pef_jabar)
-                      
-                      
-#remove objects
+#menggabungkan observasi dari dua object dataset
+pef_dki_jabar = rbind(pef_dki,pef_jabar)                  
+                  
+#remove objects dataset yang tidak terpakai (membersihkan workspace ~ mengurangi penggunaan memori)
 rm(w5_pef_c_fj,w5_pef_c_ij,w5_pef_c_lj,w5_pef_c_rj)
 
-
 #exploring the data
-# check jumlah obs
+# check jumlah obs pada object dataset pef
 length(pef$pidlink)
 
-# check jumlah obs pidlink unik
+# check jumlah obs pidlink yang unik
 n_distinct(pef$pidlink)
 
 length(w5$pidlink)
