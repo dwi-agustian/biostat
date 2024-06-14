@@ -12,9 +12,11 @@ Data Description
 1. PEF (PEF.csv)
 Data peak expiration flow yang didapat dari data IFLS gelombang 5. Didowload dari website IFLS (www.ifls.org) pada tanggal x-x-yyyy.
 
-2.Fhh1new.csv
+2. Fhh1new.csv
 Data yang berasal dari buku online: https://bookdown.org/roback/bookdown-BeyondMLR/
+
 The Philippine Statistics Authority (PSA) spearheads the Family Income and Expenditure Survey (FIES) nationwide. The survey, which is undertaken every three years, is aimed at providing data on family income and expenditure, including levels of consumption by item of expenditure. Our data, from the 2015 FIES, is a subset of 1500 of the 40,000 observations (Philippine Statistics Authority 2015). Our data set focuses on five regions: Central Luzon, Metro Manila, Ilocos, Davao, and Visayas
+
 Each line of the data file refers to a household at the time of the survey:
 Description of variable
 location = where the house is located (Central Luzon, Davao Region, Ilocos Region, Metro Manila, or Visayas)
