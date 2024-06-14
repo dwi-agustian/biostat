@@ -1,18 +1,33 @@
 # skript untuk kelas data manajemen dan analisis
-#skript R
-1+1
-#Aktivasi package dplyr
-library(dplyr)
+# contoh skript R sederhana
+#kode operasi matematik penjumlahan
+1 + 3
+
+#perkalian
+2 * 3
+
+#pembagian
+10 / 2
+
+#pengurangan
+7 -2
+
+#Aktivasi package dplyr + paket lainnya yg tergabung dalam grup tdyverse
+library(tidyverse)
 
 #membaca data dari URL
+#menggunakan library readr
 library(readr)
+#membaca data crime(kejahatan) di kampus2 
 c_data <- read_csv("https://raw.githubusercontent.com/dwi-agustian/biostat/main/c_data.csv")
 
+#menggunakan library data.table
 library(data.table)
+#membaca data hasil pengukuran PEFR IFLS wave 5
 pef <- fread("https://raw.githubusercontent.com/dwi-agustian/biostat/main/pef.csv")
 
+#membaca data morbiditas dan kondisi penyakit IFLS wave 5
 w5 <- fread("https://raw.githubusercontent.com/dwi-agustian/biostat/main/w5.csv")
-
 
 #mempelajari struktur data
 names(pef)
@@ -25,6 +40,16 @@ str(w5)
 glimpse(w5)
 summary(w5)
 
+#memvisualisasi distribusi data umur berupa numerik dengan histogram dari variabel age pada object dataset pef
+hist(pef$age)
+
+#memvisualisasi distribusi data umur berupa numerik dengan boxplot pada object dataset pef
+boxplot(pef$age)
+
+#memvisualisasi frekuensi dari 
+table(c_data$type)
+
+table(c_data$region)
 
 #subsetting data set
 #subsetting variables
