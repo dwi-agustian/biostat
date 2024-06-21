@@ -161,4 +161,144 @@ w5$pidlink = w5$pidlink_num
 
 glimpse(w5)
 
+#menampilkan frekuensi variable sex
+table (pef_w5$sex)
+#menampilkan frekuensi variable asthma
+table(pef_w5$Asthma)
+#menampilkan descriptive statistic variable age (numeric)
+summary(pef_w5$age)
 
+#menampilkan histogram variable age (numeric)
+hist(pef_w5$age)
+
+#check normality data
+#histogram
+hist(pef_w5$age)
+hist(pef_w5$height)
+
+#grafik normality
+qqnorm(pef_w5$age); qqline(pef_w5$age)
+qqnorm(pef_w5$height); qqline(pef_w5$height)
+
+# normality test for small sample (3-5000)
+shapiro.test(pef_w5$age)
+
+#for big sample
+library(nortest)
+lillie.test(pef_w5$age)
+lillie.test(pef_w5$height)
+lillie.test(pef_w5$pef)
+
+#Outlier test for detection
+library(outliers)
+#small sample (<30)
+dixon.test(pef_w5$age)
+dixon.test(pef_w5$height)
+dixon.test(pef_w5$pef)
+
+#Big sample
+#test nilai outlier tinggi
+chisq.out.test(pef_w5$age)
+max(pef_w5$age)
+chisq.out.test(pef_w5$height)
+chisq.out.test(pef_w5$pef)
+
+#test nilai outlier rendah
+chisq.out.test(pef_w5$age,opposite = TRUE)
+min(pef_w5$age)
+
+grubbs.test(pef_w5$age)
+grubbs.test(pef_w5$age,opposite = TRUE)
+
+#identifikasi outlier menggunakan boxplot
+boxplot(pef_w5$age)
+boxplot(pef_w5$height)
+boxplot(pef_w5$pef)
+#memvisualisasi nilai2 outlier sesuai boxplot
+boxplot(pef_w5$age,plot = FALSE)$out
+boxplot(pef_w5$height,plot = FALSE)$out
+
+#mengidentifikasi nilai cut offs
+min(boxplot(pef_w5$age,plot = FALSE)$out)
+#variabel usia
+outliers <- boxplot(pef_w5$age,plot = FALSE)$out
+stem(outliers)
+#variable height
+outliers <- boxplot(pef_w5$height,plot = FALSE)$out
+stem(outliers)
+
+#boxplot
+boxplot(w5_pef$age~w5_pef$sex,xlab = "Jenis Kelamin",ylab ="Usia(tahun)",
+        col = c("red","blue"), 
+        main="Distribusi Usia berdasarkan Jenis Kelamin")
+boxplot(w5_pef$pef)
+boxplot(w5_pef$pef, plot = FALSE)$out
+min(boxplot(w5_pef$pef, plot = FALSE)$out)
+outliers <- boxplot(w5_pef$pef, plot = FALSE)$out
+stem(outliers)
+data_no_outlier <- subset(w5_pef,w5_pef$pef >20 & w5_pef$pef <710 ) 
+boxplot(data_no_outlier$pef)
+boxplot(data_no_outlier$pef, plot = FALSE)$out
+length(data_no_outlier)
+
+grubbs.test(data_no_outlier$pef)
+grubbs.test(data_no_outlier$pef,opposite = TRUE)
+lillie.test(data_no_outlier$pef)
+qqnorm(data_no_outlier$pef); qqline(data_no_outlier$pef)
+
+#Visualisasi hubungan antara variable dengan grafik scatter plot
+plot(pef_w5$age,pef_w5$pef)
+plot(pef_w5$height,pef_w5$pef)
+table(pef_w5$sex)
+
+#cleaning data
+#Exclusion of age 9yo
+pefc = pef_w5%>% filter(age>9)
+#exclussion asthma missing
+table(pefc$Asthma)
+pefc = pefc %>% filter (Asthma=='Yes-Asthma'|Asthma=='No-Asthma')
+table(pefc$sex)
+#membuat data khusus laki2
+pefm = pefc %>% filter (sex=='Male')
+
+#membuat data khusus perempuan
+peff = pefc %>% filter (sex=='Female')
+
+#visualisasi plot khusus laki2
+plot(pefm$age,pefm$pef)
+
+#visualisasi plot khusus perempuan
+plot(peff$age,peff$pef)
+
+plot(pefc$age,pefc$pef)
+#Visualisasi hubungan antara variable kategori (sex) dengan pef
+boxplot(pefc$pef~pefc$sex,xlab = "Jenis Kelamin",ylab ="PEF",
+        col = c("red","blue"), 
+        main="Distribusi PEF berdasarkan Jenis Kelamin")
+#Visualisasi hubungan antara variable kategori (Asthma) dengan pef
+boxplot(pefc$pef~pefc$Asthma,xlab = "Asthma",ylab ="PEF",
+        col = c("red","blue"), 
+        main="Distribusi PEF berdasarkan Status Asthma")
+#Visualisasi hubungan antara variable kategori (merokok) dengan pef
+boxplot(pefc$pef~pefc$smokingn,xlab = "Jenis Kelamin",ylab ="PEF",
+        col = c("red","blue"), 
+        main="Distribusi PEF berdasarkan Status Merokok")
+
+#subset Yes-Asthma
+boxplot(pef~smokingn,xlab = "Status Merokok",ylab ="PEF",
+        col = c("red","blue"), data = pefc,
+        subset= Asthma=="Yes-Asthma",
+        main="Distribusi PEF berdasarkan Status Merokok pada subyek Asthma")
+
+#subset No-Asthma
+boxplot(pef~smokingn,xlab = "Status Merokok",ylab ="PEF",
+        col = c("red","blue"), data = pefc,
+        subset= Asthma=="No-Asthma",
+        main="Distribusi PEF berdasarkan Status Merokok pada subyek Non-Asthma")
+
+#Visualisasi hubungan antara variable kategori (Asthma) dengan crp
+boxplot(crp_plas_equi~Asthma,xlab = "Asthma",ylab ="PEF",
+        col = c("red","blue"), data =pefc)
+
+#uji dua rata-rata (t.test)
+t.test(pef_w5$pef~pef_w5$sex)
