@@ -302,3 +302,8 @@ boxplot(crp_plas_equi~Asthma,xlab = "Asthma",ylab ="PEF",
 
 #uji dua rata-rata (t.test)
 t.test(pef_w5$pef~pef_w5$sex)
+
+# membandingkan rata-rata lebih dari 3 grup (analysis of variance)
+res.aov <- aov(pef ~ smoking, data = uas)
+# Summary of the analysis
+summary(res.aov)
