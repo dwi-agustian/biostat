@@ -25,3 +25,6 @@ total = the number of people in the household other than the head
 numLT5 = the number in the household under 5 years of age
 roof = the type of roof in the household (either Predominantly Light/Salvaged Material, or Predominantly Strong Material, where stronger material can sometimes be used as a proxy for greater wealth)
 
+3. Data pefc2, pefc3, dan pefc4
+4. Data smoking (berisikan variabel kebiasaan merokok) berasal dari IFLS gelombang 5
+5. Data stroke (berisikan variabel kondisi terjadinya stroke/Variabel H, dengan kode 1= Ya, 3=Tidak)
