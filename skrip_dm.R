@@ -301,9 +301,43 @@ boxplot(crp_plas_equi~Asthma,xlab = "Asthma",ylab ="PEF",
         col = c("red","blue"), data =pefc)
 
 #uji dua rata-rata (t.test)
-t.test(pef_w5$pef~pef_w5$sex)
+#opsi kode 1
+t.test(pefc$pef~pefc$sex)
+#opsi kode 2
+t.test(pef~sex,data=pefc)
 
 # membandingkan rata-rata lebih dari 3 grup (analysis of variance)
 res.aov <- aov(pef ~ smoking, data = uas)
 # Summary of the analysis
 summary(res.aov)
+
+#uji korelasi antara pef dengan age dengan person & spearman
+#Pearson
+cor.test(pefc$age,pefc$pef)
+#Spearman
+cor.test(pefc$age,pefc$pef,method = 'spearman')
+
+
+#single linier regression y=pef, x=age, y~x1
+smod1 = lm( pef~age , data=pefc)
+summary(smod1)
+
+#multiple linear regression
+mmod = lm(pef~age+sex+height+Asthma, data=pefc)
+summary(mmod)
+
+#melakukan pemodelan dengan stepwise forward & backward
+#persiapan min dan max model
+#model min
+modmin = lm(pef~1,data=pefc)
+#model max/full model
+modmax = lm(pef~age + sex + height + lncrp_plas_equi + 
+              A + B + C + D +E + F +G + H+I+J+M+O+P+Q+R, data=pefc)
+
+#forward
+step(modmin, direction="forward",
+     scope =list(lower=modmin, upper=modmax))
+
+#backward
+step(modmax, direction="backward",
+     scope =list(lower=modmin, upper=modmax))
