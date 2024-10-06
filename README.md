@@ -35,19 +35,20 @@ type. All were free from coronary heart disease at the start of the research. Ei
 later change in this situation was recorded.
 Format
 A data frame with 3154 observations on the following 13 variables.
-age= age in years
-height= height in inches
-weight= weight in pounds
-sdp= systolic blood pressure in mm Hg
-dbp= diastolic blood pressure in mm Hg
-chol= Fasting serum cholesterol in mm %
-behave= behavior type which is a factor with levels A1 A2 B3 B4
-cigs= number of cigarettes smoked per day
-dibep= behavior type a factor with levels A (Agressive) B (Passive)
-chd= coronary heat disease developed is a factor with levels no yes
-typechd= type of coronary heart disease is a factor with levels angina infdeath none silent
-timechd= Time of CHD event or end of follow-up
-arcus= arcus senilis is a factor with levels absent present
+age= age in years;
+height= height in inches;
+weight= weight in pounds;
+sdp= systolic blood pressure in mm Hg;
+dbp= diastolic blood pressure in mm Hg;
+chol= Fasting serum cholesterol in mm %;
+behave= behavior type which is a factor with levels A1 A2 B3 B4;
+cigs= number of cigarettes smoked per day;
+dibep= behavior type a factor with levels A (Agressive) B (Passive);
+chd= coronary heat disease developed is a factor with levels no yes;
+typechd= type of coronary heart disease is a factor with levels angina infdeath none silent;
+timechd= Time of CHD event or end of follow-up;
+arcus= arcus senilis is a factor with levels absent present.
+
 Details
 The WCGS began in 1960 with 3,524 male volunteers who were employed by 11 California companies. Subjects were 39 to 59 years old and free of heart disease as determined by electrocardiogram.
 After the initial screening, the study population dropped to 3,154 and the number of companies to
