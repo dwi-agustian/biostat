@@ -28,3 +28,4 @@ roof = the type of roof in the household (either Predominantly Light/Salvaged Ma
 3. Data pefc2, pefc3, dan pefc4
 4. Data smoking (berisikan variabel kebiasaan merokok) berasal dari IFLS gelombang 5
 5. Data stroke (berisikan variabel kondisi terjadinya stroke/Variabel H, dengan kode 1= Ya, 3=Tidak)
+6. Data wcgs (berisikan data Coronary Heart Disease/ CHD)
