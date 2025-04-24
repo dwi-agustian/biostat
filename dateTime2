@@ -1,0 +1,86 @@
+library(lubridate)
+# Parse x 
+x <- "2010 September 20th" # 2010-09-20
+x
+class(x)
+x = ymd(x)
+x
+class(x)
+
+# Parse y 
+y <- "02.01.2010"  # 2010-01-02
+y
+class(y)
+y = dmy(y)
+y
+class(y)
+
+# Parse z 
+z <- "Sep, 12th 2010 14:00"  # 2010-09-12T14:00
+z
+class(z)
+z = mdy_hm(z)
+z
+class(z)
+
+# Specify an order string to parse x
+x <- "Monday June 1st 2010 at 4pm"
+parse_date_time(x, orders = "mdy_I_p")
+
+# Specify order to include both "mdy" and "dmy"
+two_orders <- c("October 7, 2001", "October 13, 2002", "April 13, 2003", 
+                "17 April 2005", "23 April 2017")
+parse_date_time(two_orders, orders = c("mdy","dmy"))
+
+# Specify order to include "dOmY", "OmY" and "Y"
+short_dates <- c("11 December 1282", "May 1372", "1253")
+parse_date_time(short_dates, orders =c("dOmY", "OmY", "Y"))
+
+library(lubridate)
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+# Import CSV with read_csv()
+akl_daily_raw <- read_csv("https://assets.datacamp.com/production/repositories/1435/datasets/f6590278193112325a874cb69cb94d7fbca5732f/akl_weather_daily.csv")
+
+
+
+# Print akl_daily_raw
+akl_daily_raw
+
+# Parse date 
+akl_daily <- akl_daily_raw %>%
+  mutate(date = ymd(date))
+
+# Print akl_daily
+akl_daily
+
+# Plot to check work
+ggplot(akl_daily, aes(x = date, y = max_temp)) +
+  geom_line()
+
+# Import "akl_weather_hourly_2016.csv"
+akl_hourly_raw <- read_csv("https://assets.datacamp.com/production/repositories/1435/datasets/0b0ef636e2a69936ef8236108bfd2261647f5e9e/akl_weather_hourly_2016.csv")
+
+# Print akl_hourly_raw
+print(akl_hourly_raw)
+
+# Use make_date() to combine year, month and mday 
+akl_hourly  <- akl_hourly_raw  %>% 
+  mutate(date = make_date(year = year, month = month, day = mday))
+glimpse(akl_hourly)
+
+# Parse datetime_string 
+akl_hourly <- akl_hourly  %>% 
+  mutate(
+    datetime_string = paste(date, time, sep = "T"),
+    datetime = parse_date_time(datetime_string,orders="ymd_HMS")
+  )
+
+# Print date, time and datetime columns of akl_hourly
+akl_hourly %>% select(date, time, datetime)
+
+# Plot to check work
+ggplot(akl_hourly, aes(x = datetime, y = temperature)) +
+  geom_line()
