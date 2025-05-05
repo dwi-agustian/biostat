@@ -1,0 +1,41 @@
+# Biostat Lanjut - Logistic Regression
+# Load the data and remove NAs
+data("PimaIndiansDiabetes2", package = "mlbench")
+
+#mendelete observasi yang datanya tidak lengkap
+Pima <- na.omit(PimaIndiansDiabetes2)
+
+# Inspect the data
+sample_n(Pima, 3)
+
+names(Pima)
+
+# Fit the model
+model1 <- glm( diabetes ~ pregnant , data = Pima, family = binomial)
+
+model2 <- glm( diabetes ~ glucose , data = Pima, family = binomial)
+
+model3 <- glm( diabetes ~ . , data = Pima, family = binomial)
+
+# Summarize the model
+summary(model1)
+summary(model2)
+summary(model3)
+table (Pima$diabetes)
+summary(Pima$glucose)
+coef(model2)
+summary(model2) $coef
+
+#penghitungan Odds Ratio Glucose dari model 2
+exp(0.043421)
+
+exp(-2)
+
+#estimasi peluang kejadian diabetes 
+#pada orang dengan nilai glucose = 100
+0.13/1.13 
+
+#perhitungan OR Glukosa pada model 2
+exp(-5.96)/exp(-6) # perbandingan odd glukosa=1 vs glukosa=0
+exp(-5.96+6) # perbandingan odd glukosa=1 vs glukosa=0
+exp(0.042421) # perhitungan langsung dari nilai Beta/ koefisien
