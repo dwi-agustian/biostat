@@ -17,14 +17,26 @@ model2 <- glm( diabetes ~ glucose , data = Pima, family = binomial)
 
 model3 <- glm( diabetes ~ . , data = Pima, family = binomial)
 
+model4 <- glm( diabetes ~ glucose + mass + pedigree , 
+               data = Pima, family = binomial)
 # Summarize the model
 summary(model1)
 summary(model2)
 summary(model3)
+summary(model4)
+
+# tabel frekuensi untuk melihat koding variabel diabetes
 table (Pima$diabetes)
+
+# statistik deskriptif variabel glucose
 summary(Pima$glucose)
+
+# menampilkan koefisien dari hasil regresi
 coef(model2)
 summary(model2) $coef
+coef(model3)
+summary(model3) $coef
+
 
 #penghitungan Odds Ratio Glucose dari model 2
 exp(0.043421)
@@ -39,3 +51,8 @@ exp(-2)
 exp(-5.96)/exp(-6) # perbandingan odd glukosa=1 vs glukosa=0
 exp(-5.96+6) # perbandingan odd glukosa=1 vs glukosa=0
 exp(0.042421) # perhitungan langsung dari nilai Beta/ koefisien
+
+#perhitungan OR Mass pada model 4
+exp(0.068073) # Odds Ratio untuk variabel mass = 1.07
+
+
