@@ -8,6 +8,7 @@ library(multcomp)
 library(pander)
 library(MASS)
 library(tidyverse)
+
 #data reading
 library(readr)
 fHH1 <- read_delim("https://raw.githubusercontent.com/dwi-agustian/biostat/refs/heads/main/fHH1.csv", 
