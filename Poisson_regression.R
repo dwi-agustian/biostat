@@ -9,9 +9,9 @@ library(pander)
 library(MASS)
 library(tidyverse)
 #data reading
-library(data.table)
-fHH1 <- fread("https://raw.githubusercontent.com/dwi-agustian/biostat/main/fHH1new.csv?token=GHSAT0AAAAAABSN2FVPZHTGIVV5QTL2MA6UYRMTG3A")
-
+library(readr)
+fHH1 <- read_delim("https://raw.githubusercontent.com/dwi-agustian/biostat/refs/heads/main/fHH1.csv", 
+                   delim = ";", escape_double = FALSE, trim_ws = TRUE)
 #Explaratory Data analysis
 names(fHH1)
 
