@@ -8,18 +8,21 @@ library(multcomp)
 library(pander)
 library(MASS)
 library(tidyverse)
-
 #data reading
 library(readr)
 fHH1 <- read_delim("https://raw.githubusercontent.com/dwi-agustian/biostat/refs/heads/main/fHH1.csv", 
                    delim = ";", escape_double = FALSE, trim_ws = TRUE)
+View(fHH1)
 #Explaratory Data analysis
 names(fHH1)
 
-#visualisasi
+#visualisasi histogram dengan plot
+hist(fHH1$total)
+
+#visualisasi histogram dengan ggplot
 ggplot(fHH1, aes(total)) + 
-  geom_histogram(binwidth = .25, color = "black", 
-                 fill = "white") + 
+  geom_histogram(binwidth = .3, color = "red", 
+                 fill = "blue") + 
   xlab("Number in the house excluding head of household") +
   ylab("Count of households")
 
@@ -57,14 +60,56 @@ ggplot(sumStats2, aes(x=age, y=logmntotal, color=location,
   xlab("Age of head of the household") +
   ylab("Log empirical mean household size") 
 
-#poisson regression
-modela = glm(total ~ age, family = poisson, data = fHH1)
+#poisson regression / count regression
+model_p1 = glm(total ~ age, family = poisson, data = fHH1)
+
+summary(model_p1)
 
 #coefficient value
-coef(summary(modela))
+tabel_est = coef(summary(model_p1))
 
-#summary of the model
-summary(modela)
+#mengeluarkan hasil estimate poisson regression dalam bentuk file csv
+#yang bisa dibaca di excel
+write.csv(tabel_est,"tabel_est.csv")
+
+#identifikasi home folder tempat file terexport (write)
+getwd()
+
+
+#menghitung jumlah anggota kel dgn usia kepala keluarga baseline (0)
+exp(-0.004705881*0) #hasilnya 1
+
+#menghitung jumlah anggota kel dgn usia kepala keluarga lebih tua 1 tahun (1)
+exp(-0.004705881*1) #hasilnya 0.9953052
+
+#menghitung jumlah anggota kel dgn usia kepala keluarga  25 tahun (25 th)
+exp(-0.004705881*25) #hasilnya 0.8890098
+
+#menghitung jumlah anggota kel dgn usia kepala keluarga 20 tahun (20 th)
+exp(-0.004705881*20) #hasilnya 0.9101757
+
+#log jumlah anggota kel/ dengan KK usia 20 = 1.450876
+(-0.0047059*20) + 1.54499422
+# jumlah angg kel dgn KK usia 20 = exp(1.450876) = 4.266851
+exp(1.450876)
+
+#log jumlah anggota kel/ dengan KK usia 25 = 1.427347
+(-0.0047059*25) + 1.54499422
+# jumlah angg kel dgn KK usia 25 = exp(1.427347) = 4.167628
+exp(1.427347)
+# prediksi selisih jumlah angg kel kk usia 25 vs 20 = 3.257447
+4.167628 - 4.266851
+25-20
+
+#selisih per tahunnya
+-0.099223 /5
+
+# identifikasi variabel lain
+str(fHH1$location)
+table(fHH1$location)
+
+model_p3 = glm(total ~ age + location, family = poisson, data=fHH1)
+summary(model_p3)
 
 #residual deviance & dispersion
 cat(" Residual deviance = ", summary(modela)$deviance, " on ",
@@ -72,60 +117,61 @@ cat(" Residual deviance = ", summary(modela)$deviance, " on ",
     "Dispersion parameter = ", summary(modela)$dispersion)
 
 # Wald type CI by hand
-#ekstraksi dari Beta0
-beta0hat <- summary(modela)$coefficients[1,1] 
+#ekstraksi nilai Beta0 dari model 
+beta0hat <- summary(model_p1)$coefficients[1,1] 
 beta0hat
 
-#ekstraksi dari Beta1
-beta1hat <- summary(modela)$coefficients[2,1]
+#ekstraksi nilai Beta1 dari model
+beta1hat <- summary(model_p1)$coefficients[2,1]
 beta1hat
 
 #Kalkulasi rate ratio
 exp(beta1hat)
 
-exp(-0.0047)
-
 #ekstraksi dari SE Beta1
-beta1se <- summary(modela)$coefficients[2,2]
+beta1se <- summary(model_p1)$coefficients[2,2]
+
+#penghitungan 95% CI dari Beta 1
 beta1hat - 1.96*beta1se   # lower bound 
 beta1hat + 1.96*beta1se   # upper bound 
+
+#penghitungan 95% CI dari Rate Ratio
 exp(beta1hat - 1.96*beta1se)
 exp(beta1hat + 1.96*beta1se)
 
 # CI for betas using profile likelihood
-confint(modela)
+confint(model_p1)
 
 #calculating CI for relative risk
-exp(confint(modela))
+exp(confint(model_p1))
 
 # model0 is the null/reduced model
 model0 <- glm(total ~ 1, family = poisson, data = fHH1)
 
 # perform testing for comparing models
-drop_in_dev <- anova(model0, modela, test = "Chisq")
+drop_in_dev <- anova(model0, model_p1, test = "Chisq")
 
 drop_in_dev
-
 
 # second order variable (quadratic term)
 # creating variable (age square)
 fHH1 <- fHH1 %>% mutate(age2 = age*age)
 
 # model with quadratic term
-modela2 = glm(total ~ age + age2, family = poisson, 
+model_p2 = glm(total ~ age + age2, family = poisson, 
               data = fHH1)
 
 # comparing models
-drop_in_dev <- anova(modela, modela2, test = "Chisq")
+drop_in_dev <- anova(model_p1, model_p2, test = "Chisq")
 
 drop_in_dev
 
 # Adding covariate (location)
-modela2L = glm(total ~ age + age2 + location, 
+model_p3 = glm(total ~ age + age2 + location, 
                family = poisson, data = fHH1)
 
 # comparing models
-drop_in_dev <- anova(modela2, modela2L, test = "Chisq")
+drop_in_dev <- anova(model_p2, model_p3, test = "Chisq")
 
 drop_in_dev
 
