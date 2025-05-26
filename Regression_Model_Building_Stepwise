@@ -1,7 +1,7 @@
 # Load the data and remove NAs
 data("PimaIndiansDiabetes2", package = "mlbench")
 
-#mendelete observasi yang datanya tidak lengkap
+#deleting missing data
 Pima <- na.omit(PimaIndiansDiabetes2)
 
 #model building
