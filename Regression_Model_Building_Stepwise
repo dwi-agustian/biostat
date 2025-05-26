@@ -1,0 +1,19 @@
+# Load the data and remove NAs
+data("PimaIndiansDiabetes2", package = "mlbench")
+
+#mendelete observasi yang datanya tidak lengkap
+Pima <- na.omit(PimaIndiansDiabetes2)
+
+#model building
+modelfull <- glm( diabetes ~ . , data = Pima, family = binomial)
+model0 <- glm( diabetes ~ 1 , data = Pima, family = binomial)
+summary (modelfull)
+summary(model0)
+
+#stepwise
+#backward
+step(modelfull,direction = "backward",
+     scope =list(lower=model0, upper=modelfull))
+#forward
+step(model0,direction = "forward",
+     scope =list(lower=model0, upper=modelfull))
