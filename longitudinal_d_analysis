@@ -1,0 +1,24 @@
+library(faraway)
+#using psid data from faraway package
+data(psid, package="faraway")
+head(psid)
+
+names(psid)
+
+
+#plotting psid sample data with ggplot
+#sample 20 data
+library(dplyr)
+psid20 <- filter(psid, person <= 20)
+#plotting with panel graph
+library(ggplot2)
+ggplot(psid20, aes(x=year, y=income))+geom_line()+facet_wrap(~ person)
+
+#plotting by sex, log10 scale, income+ 100
+ggplot(psid20, aes(x=year, y=income+100, group=person)) +geom_line() +
+  facet_wrap(~ sex) + scale_y_log10()
+
+# model individual
+lmod <- lm(log(income) ~ I(year-78), subset=(person==11), psid)
+coef(lmod)
+summary(lmod)
