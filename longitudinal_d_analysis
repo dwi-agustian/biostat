@@ -22,3 +22,19 @@ ggplot(psid20, aes(x=year, y=income+100, group=person)) +geom_line() +
 lmod <- lm(log(income) ~ I(year-78), subset=(person==11), psid)
 coef(lmod)
 summary(lmod)
+
+# using package lme4 to model all individual
+library(lme4)
+ml <- lmList(log(income) ~ I(year-78) | person, psid)
+intercepts <- sapply(ml,coef)[1,]
+slopes <- sapply(ml,coef)[2,]
+summary(psid$person)
+
+#plotting intercept & slope
+plot(intercepts,slopes,xlab="Intercept",ylab="Slope")
+
+psex <- psid$sex[match(1:85,psid$person)]
+boxplot(split(slopes,psex))
+
+#statistical test for slopes different F vs M
+t.test(slopes[psex=="M"],slopes[psex=="F"])
