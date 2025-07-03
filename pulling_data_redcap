@@ -1,0 +1,22 @@
+# Token API: Get the API token from the administrator of project
+#1.Loading the package
+library (redcapAPI)
+
+#2.setup connection
+rcon1 <- redcapConnection(
+  url   = "https://redcap.inbigdc.or.id/api/",
+  token = "WRITE DOWN THE TOKEN HERE"
+)
+
+#3.pulling report table from server
+tab_1 <- exportReports(
+  rcon1,
+  506,
+  factors = TRUE,
+  labels = TRUE,
+  dates = TRUE,
+  checkboxLabels = TRUE
+)
+
+#4.save the object tab_1 into csv file in home directory
+write.csv(tab_1,'alamat.csv')
