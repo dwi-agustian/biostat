@@ -208,3 +208,44 @@ surv_cxmod <- cbind(surv_cxmod0, m_newdat)
 # Plot
 ggsurvplot_df(surv_cxmod, linetype = "horTh", color = "tsize",
               legend.title = NULL, censor = FALSE)
+
+#COX PH Model
+names(GBSG2)
+#menganalisis pengaruh hormonal terapi
+cox_th = coxph(Surv(time, cens) ~ horTh, data=GBSG2)
+
+print(cox_th)
+
+#Menghitung Hazard Ratio (HR)
+exp(-0.3640)
+
+#check PH assumption: 
+# a non-significant relationship between residuals and time
+cox.zph(cox_th)
+
+#check outliers
+ggcoxdiagnostics(cox_th, type = "dfbeta",
+                 linear.predictions = FALSE, 
+                 ggtheme = theme_bw())
+
+#menganalisis pengaruh usia
+cox_age = coxph(Surv(time, cens) ~ age, data=GBSG2)
+print(cox_age)
+
+#multivariable model
+mod1 = coxph(Surv(time, cens) ~ age + horTh + tsize + menostat + tgrade + 
+               pnodes + progrec + estrec, data=GBSG2)
+print(mod1)
+
+
+#check PH assumption: 
+# a non-significant relationship between residuals and time
+cox.zph(mod1)
+
+#memperlihatkan AIC dari model
+print(paste0("mod1 AIC = ", round(AIC(mod1), 1)))
+
+#check outliers
+ggcoxdiagnostics(mod1, type = "dfbeta",
+                 linear.predictions = FALSE, ggtheme = theme_bw())
+
