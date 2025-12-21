@@ -1,0 +1,29 @@
+#Code R untuk UAS Biostatika Dasar
+
+#mengaktifkan library readr
+library(readr)
+
+#membaca data Western Collaborative Group Study
+wcgs = read_csv("https://raw.githubusercontent.com/dwi-agustian/biostat/main/wcgs.csv")
+
+# menyiapkan data untuk ujian tiap mahasiswa
+set.seed(12345) #ganti angka 12345 dengan 5 digit terakhir npm
+
+# memilih secara random 2500 observasi
+sample_size <- 2500
+ds12345 <- wcgs[sample(nrow(wcgs), sample_size), ]
+
+#melihat nama variabel
+names(ds12345)
+
+# tujuan penelitian: membuktikan apakah faktor usia,
+# tekanan darah (systole & diastole), perilaku, 
+# dan konsumsi rokok
+# berasosiasi dengan tingkat cholesterol (chol)
+
+#memilih berdasarkan nama variables
+ds12345  = select(ds12345, age,sdp,dbp,dibep,cigs,chol)
+
+#contoh Analisis secara deskriptif karakteristik subyek
+summary(ds12345)
+table(ds12345$dibep)
