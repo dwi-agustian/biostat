@@ -27,3 +27,9 @@ ds12345  = select(ds12345, age,sdp,dbp,dibep,cigs,chol)
 #contoh Analisis secara deskriptif karakteristik subyek
 summary(ds12345)
 table(ds12345$dibep)
+
+#mensave data yang digunakan dalam bentuk/format csv
+write.csv(ds12345,"ds12345.csv")
+
+#melihat working direktori tempat saving data
+getwd()
