@@ -1,0 +1,52 @@
+#uas biostat lanjut
+#menyiapkan data uas
+#Studi 1
+install.packages('AER')
+data(Affairs, package = 'AER')
+set.seed(12345)#ganti dengan 5 digit terakhir
+data <- Affairs[sample(nrow(Affairs), size = 500, replace = FALSE),-c(8)]
+head(data)
+
+#Studi 2
+#mengaktifkan library readr
+library(readr)
+
+#membaca data Western Collaborative Group Study
+wcgs = read_csv("https://raw.githubusercontent.com/dwi-agustian/biostat/main/wcgs.csv")
+
+# menyiapkan data untuk ujian tiap mahasiswa
+set.seed(12345) #ganti angka 12345 dengan 5 digit terakhir npm
+
+# memilih secara random 2500 observasi
+sample_size <- 2500
+ds12345 <- wcgs[sample(nrow(wcgs), sample_size), ]
+
+#melihat nama variabel
+names(ds12345)
+
+# tujuan penelitian: membuktikan apakah faktor usia,
+# tekanan darah (systole & diastole), perilaku, 
+# konsumsi rokok, tingkat kolesterol
+# berasosiasi dengan kejadian chd
+
+#memilih berdasarkan nama variables
+ds12345  = select(ds12345, age,sdp,dbp,dibep,cigs,chol,chd)
+table(ds12345$chd)
+
+#Studi 3
+data(cancer, package="survival")
+names(cancer)
+# menyiapkan data untuk ujian tiap mahasiswa
+set.seed(12345) #ganti angka 12345 dengan 5 digit terakhir npm
+
+# memilih secara random 200 observasi
+sample_size <- 200
+cancer12345 <- cancer[sample(nrow(cancer), sample_size), ]
+names(cancer12345)
+
+
+#Studi 4
+#loading dataset untuk studi 4
+load(url("http://alecri.github.io/downloads/data/dental.RData"))
+head(dental)
+names(dental)
