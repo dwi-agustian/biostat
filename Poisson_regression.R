@@ -10,6 +10,7 @@ library(MASS)
 library(tidyverse)
 #data reading
 library(readr)
+# https://raw.githubusercontent.com/dwi-agustian/biostat/refs/heads/main/c_data.csv
 fHH1 <- read_delim("https://raw.githubusercontent.com/dwi-agustian/biostat/refs/heads/main/fHH1.csv", 
                    delim = ";", escape_double = FALSE, trim_ws = TRUE)
 View(fHH1)
