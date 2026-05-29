@@ -66,4 +66,16 @@ Data Description
    enroll1000 = enrollment at the school, in thousands
    region = region of the country (C = Central, MW = Midwest, NE = Northeast, SE = Southeast, SW = Southwest, and W = West)
 
+9. datapef.csv
+   Description
+   A data frame with 26314 observations on the following  variables:
+   pidlink = subject id;
+   age = age in years;
+   height = height in cm;
+   sex = Male , Female;
+   pef = Peak Expiratory Flow (PEF), also known as Peak Expiratory Flow Rate (PEFR), is measured in liters per minute (L/min);
+   smoking = smoking status: Active Smoking, Quit Smoking, Not Smoking;
+   event = History of stroke attack: 1 = yes, 3 = no;
+   hyper = History of hypertension diagnosis: Yes-Hypertension, No-Hypertension, NAHype = Missing data, Do't Know-Hyp = Not knowing;
+   agegr = Age Group: Adult, Children
 
