@@ -73,11 +73,11 @@ Data Description
 
    pidlink = subject id;<br>
    age = age in years;<br>
-   height = height in cm;
-   sex = Male , Female;
-   pef = Peak Expiratory Flow (PEF), also known as Peak Expiratory Flow Rate (PEFR), is measured in liters per minute (L/min);
-   smoking = smoking status: Active Smoking, Quit Smoking, Not Smoking;
-   event = History of stroke attack: 1 = yes, 3 = no;
-   hyper = History of hypertension diagnosis: Yes-Hypertension, No-Hypertension, NAHype = Missing data, Do't Know-Hyp = Not knowing;
+   height = height in cm;<br>
+   sex = Male , Female;<br>
+   pef = Peak Expiratory Flow (PEF), also known as Peak Expiratory Flow Rate (PEFR), is measured in liters per minute (L/min);<br>
+   smoking = smoking status: Active Smoking, Quit Smoking, Not Smoking;<br>
+   event = History of stroke attack: 1 = yes, 3 = no;<br>
+   hyper = History of hypertension diagnosis: Yes-Hypertension, No-Hypertension, NAHype = Missing data, Do't Know-Hyp = Not knowing;<br>
    agegr = Age Group: Adult, Children
 
