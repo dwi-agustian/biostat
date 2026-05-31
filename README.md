@@ -69,7 +69,7 @@ Data Description
 9. datapef.csv
 
    Description
-   A data frame with 26314 observations taken from IFLS on the following  variables:
+   A data frame with 26,314 observations taken from IFLS wave 5 on the following  variables:
 
    pidlink = subject id;<br>
    age = age in years;<br>
