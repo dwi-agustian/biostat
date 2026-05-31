@@ -71,8 +71,8 @@ Data Description
    Description
    A data frame with 26314 observations taken from IFLS on the following  variables:
 
-   pidlink = subject id;
-   age = age in years;
+   pidlink = subject id;<br>
+   age = age in years;<br>
    height = height in cm;
    sex = Male , Female;
    pef = Peak Expiratory Flow (PEF), also known as Peak Expiratory Flow Rate (PEFR), is measured in liters per minute (L/min);
