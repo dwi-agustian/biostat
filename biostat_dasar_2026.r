@@ -73,11 +73,63 @@ names(datapef)
 #mengaktifkan library/package gt
 library(gt)
 
-#membuat table frekuensi
+#mengaktifkan library/package gt
+library(gt)
+
+# A.membuat table frekuensi univariable
 tab1 = table(datapef$hyper)
 variables <- row.names(tab1)
 
-#membuat tabel silang
+# 1. Get raw counts
+counts <- table(datapef$hyper)
+
+# 2a. Get proportions (dari total observasi)
+proportions <- prop.table(counts)
+proportions 
+percentage = round(proportions,4)*100
+percentage
+
+# 3. Combine them side-by-side
+combined = cbind(Variabel=variables, Counts = counts, Percentages = percentage)
+
+# 4. Print table ke output image
+as.data.frame(combined) %>% gt()
+p = as.data.frame(combined) %>% gt()
+
+# 5. Add title and subtitle
+p %>%
+  tab_header(
+    title = md("**Tabel 1. Prevalensi Hipertensi**"),
+    subtitle = md("*Data dari IFLS gelombang 5*")
+  )
+#obyek baru mereplace obyek lama
+p = p %>%
+  tab_header(
+    title = md("**Tabel 1. Prevalensi Hipertensi**"),
+    subtitle = md("*Data dari IFLS gelombang 5*")
+  )
+
+# menampilkan obyek baru (p)
+p
+
+# 6. Rename columns to be human-readable
+p %>% cols_label(
+  Counts = "n",
+  Percentages = "%"
+) 
+
+p = p %>% cols_label(
+    Counts = "n",
+    Percentages = "%"
+    ) 
+
+# 7. Add data source footnotes
+p %>% tab_source_note(
+  source_note = "Aplikasi:  RStudio."
+)
+
+
+## membuat tabel silang
 tab1 = table(datapef$hyper,datapef$sex)
 tab1
 
