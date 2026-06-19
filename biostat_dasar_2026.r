@@ -159,3 +159,16 @@ percentage2
 
 # 3 uji statistik membandingkan proporsi antara kelompok
 chisq.test(datapef$sex,datapef$hyper,correct = TRUE)
+
+
+#contoh kode melakukan analisis linear regresi, silahkan dimodif sesuai tujuan penelitian
+lm1 = lm(formula = pef ~ age + sex + height , data = datapef)
+
+lm2 = lm(formula = pef ~ age + sex  , data = datapef)
+
+lm3 = lm(formula = pef ~ age + height  , data = datapef)
+
+#menunjukan hasil analisis linear regresi
+summary(lm1)
+summary(lm2)
+summary(lm3)
