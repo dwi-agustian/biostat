@@ -22,7 +22,7 @@ ds12345 <- datapef[sample(nrow(datapef), sample_size), ] #ganti angka 12345 deng
 names(ds12345) #ganti angka 12345 dengan 5 digit terakhir npm
 
 #memilih berdasarkan nama variables
-ds12345  = select(ds12345, age,sex,height,pef) #ganti angka 12345 dengan 5 digit terakhir npm
+ds12345  = select(ds12345, age,sex,height,smoking, pef) #ganti angka 12345 dengan 5 digit terakhir npm
 
 #mensave data yang digunakan dalam bentuk/format csv
 write.csv(ds12345,"ds12345.csv") #ganti angka 12345 dengan 5 digit terakhir npm
