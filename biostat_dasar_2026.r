@@ -2,6 +2,8 @@
 #Aktivasi package dplyr + paket lainnya yg tergabung dalam grup tdyverse
 library(tidyverse)
 
+#catatan penting, apabila anda menggunakan dataset yang berbeda, maka code harus dimodifikasi sesuai nama datasetnya
+
 #membaca data dari URL
 #menggunakan library readr
 library(readr)
@@ -158,7 +160,21 @@ percentage2 = round(proportions2,3)*100
 percentage2
 
 # 3 uji statistik membandingkan proporsi antara kelompok
-chisq.test(datapef$sex,datapef$hyper,correct = TRUE)
+chisq.test(datapef$sex,datapef$hyper,correct = FALSE) 
+chisq.test(datapef$sex,datapef$hyper,correct = TRUE) # untuk fisher exact
+
+# 4. Uji statistik membandingkan mean antara kelompok
+t.test(datapef$pef ~ datapef$sex)
+
+# 5. Uji statistik membandingkan mean lebih dari 2 kelompok , Fit the ANOVA model
+# Formula syntax: continuous_variable ~ categorical_group_variable
+anova_model <- aov(pef ~ smoking, data = datapef)
+
+# View the summary table
+summary(anova_model)
+
+#perbandingan antar kelompok (lebih dari 2 kel)
+TukeyHSD(anova_model)
 
 
 #contoh kode melakukan analisis linear regresi, silahkan dimodif sesuai tujuan penelitian
